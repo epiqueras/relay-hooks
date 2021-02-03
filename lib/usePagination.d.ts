@@ -1,0 +1,5 @@
+import { GraphQLTaggedNode, OperationType } from 'relay-runtime';
+import { PaginationFunction, KeyType, KeyReturnType, $Call, ArrayKeyType, ArrayKeyReturnType } from './RelayHooksType';
+export declare function usePagination<TKey extends KeyType, TOperationType extends OperationType = OperationType>(fragmentNode: GraphQLTaggedNode, fragmentRef: TKey): [$Call<KeyReturnType<TKey>>, PaginationFunction<$Call<KeyReturnType<TKey>>, TOperationType['variables']>];
+export declare function usePagination<TKey extends KeyType, TOperationType extends OperationType = OperationType>(fragmentNode: GraphQLTaggedNode, fragmentRef: TKey | null): [$Call<KeyReturnType<TKey>> | null, PaginationFunction<$Call<KeyReturnType<TKey>> | null, TOperationType['variables']>];
+export declare function usePagination<TKey extends ArrayKeyType, TOperationType extends OperationType = OperationType>(fragmentNode: GraphQLTaggedNode, fragmentRef: TKey): [ReadonlyArray<$Call<ArrayKeyReturnType<TKey>>>, PaginationFunction<ReadonlyArray<$Call<ArrayKeyReturnType<TKey>>>, TOperationType['variables']>];

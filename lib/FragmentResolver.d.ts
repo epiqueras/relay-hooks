@@ -1,0 +1,51 @@
+import { IEnvironment, Disposable, Snapshot, Variables, GraphQLTaggedNode, Observer, OperationDescriptor, Subscription, ReaderSelector } from 'relay-runtime';
+import { RefetchOptions, PaginationData, ConnectionConfig, ObserverOrCallback } from './RelayHooksType';
+declare type SingularOrPluralSnapshot = Snapshot | Array<Snapshot>;
+declare type FragmentResult = {
+    snapshot: SingularOrPluralSnapshot | null;
+    data: any;
+};
+export declare class FragmentResolver {
+    _environment: IEnvironment;
+    _fragment: any;
+    _fragmentNode: any;
+    _fragmentRef: any;
+    _result: FragmentResult;
+    _disposable: Disposable;
+    _selector: ReaderSelector;
+    _forceUpdate: any;
+    _isPlural: boolean;
+    _refetchSubscription: Subscription;
+    paginationData: PaginationData;
+    _refetchVariables: Variables;
+    _isARequestInFlight: boolean;
+    _selectionReferences: Array<Disposable>;
+    _cacheSelectionReference: Disposable;
+    indexUpdate: number;
+    constructor(forceUpdate: any);
+    refreshHooks(): void;
+    dispose(): void;
+    disposeSelectionReferences(): void;
+    _retainCachedOperation(operation: OperationDescriptor): void;
+    _disposeCacheSelectionReference(): void;
+    getFragmentVariables(fRef?: any): Variables;
+    changedFragmentRef(fragmentRef: any): boolean;
+    resolve(environment: IEnvironment, fragmentNode: any, fragmentRef: any): void;
+    lookup(): void;
+    getData(): any | null;
+    subscribe(): void;
+    changeVariables(variables: any, request: any): void;
+    lookupInStore(environment: IEnvironment, operation: any, fetchPolicy: any): Snapshot | null;
+    refetch: (taggedNode: GraphQLTaggedNode, refetchVariables: Variables | ((fragmentVariables: Variables) => Variables), renderVariables: Variables, observerOrCallback: ObserverOrCallback, options: RefetchOptions) => Disposable;
+    isLoading: () => boolean;
+    hasMore: (connectionConfig?: ConnectionConfig<object>) => boolean;
+    refetchConnection: (connectionConfig: ConnectionConfig<object>, totalCount: number, observerOrCallback?: ObserverOrCallback, refetchVariables?: Variables) => Disposable;
+    loadMore: (connectionConfig: ConnectionConfig<object>, pageSize: number, observerOrCallback?: ObserverOrCallback, options?: RefetchOptions) => Disposable;
+    _fetchPage(connectionConfig: ConnectionConfig, paginatingVariables: {
+        count: number;
+        cursor: string;
+        totalCount: number;
+    }, observer: Observer<void>, options: RefetchOptions): Disposable;
+    executeFetcher(taggedNode: GraphQLTaggedNode, fetchVariables: Variables, options: RefetchOptions, observerOrCallback: ObserverOrCallback, onNext: (operation: any, payload: any, complete: any) => void): Disposable;
+}
+export {};
